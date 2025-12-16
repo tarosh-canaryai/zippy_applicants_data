@@ -78,7 +78,10 @@ try:
     # --- 5. SALES METRICS ---
     col1, col2, col3 = st.columns(3)
     col1.metric("Candidates Found", len(filtered_df))
-    col2.metric("EZ Eligible", len(filtered_df[filtered_df['zone_result'] != 'N/A']))
+    
+    ez_count = len(filtered_df[filtered_df['zone_result'].isin(["Rural Renewal Counties", "Empowerment Zone"])])
+    col2.metric("EZ/RRC Eligible", ez_count)
+    
     col3.metric("Unique NAICS Sectors", filtered_df['naics_code'].nunique())
 
     # --- 6. GROUPING & ANALYSIS ---
