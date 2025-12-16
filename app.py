@@ -71,7 +71,9 @@ try:
     if naics_filter:
         filtered_df = filtered_df[filtered_df['naics_code'].isin(naics_filter)]
     if ez_only:
-        filtered_df = filtered_df[filtered_df['zone_result'] != 'N/A']
+        # Filter for only the two specific qualifying categories
+        eligible_zones = ["Rural Renewal Counties", "Empowerment Zone"]
+        filtered_df = filtered_df[filtered_df['zone_result'].isin(eligible_zones)]
 
     # --- 5. SALES METRICS ---
     col1, col2, col3 = st.columns(3)
